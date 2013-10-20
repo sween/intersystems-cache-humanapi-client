@@ -1,18 +1,21 @@
-intersystems-cache-humanapi-client
+#intersystems-cache-humanapi-client
 ==================================
 
 An InterSystems Cache Client for the HumanAPI.
 
-The primary features of CacheJSON are:
+![alt tag](https://raw.github.com/username/projectname/branch/path/to/img.png)
 
-* Decode a single JSON object into an %ArrayOfDataTypes
-* Decode nested arrays of JSON objects into a %ListOfObjects containing %ArrayOfDataTypes
-* Decode a single JSON object into a custom Cache object
-* Encode an %ArrayOfDataTypes to a JSON string
-* Encode a custom Cache object class to a JSON string
-* Encode a %ListOfObjects containing %ArrayOfDataTypes into a JSON string
-* Embed an array as the value of an element
-* Convert a Cache object instance into an %ArrayOfDataTypes
+
+##The HumanAPI
+HumanAPI is an aggregator of consumer data streams from several devices in the market.  It keeps all of the data synchronized across all user devices and services, and normalizes it in real time to appropriate most up to date data.  The data is then served up via a normalized API to enable the rapid development of applications from a single endpoint/service.
+
+•	API Supports 11 Streams (Activity, Blood Glucose, Blood Pressure, Body Fat %, BMI, Genetic Information, Heart Rate, Location, Sleep, Weight, Height
+•	API Supports 11 Vendors ( BodyMedia, Fitbit, Jawbone, Moves, HealthGraph, Nike, Glooko, Withings, iHealth, 23andMe, and Jawbone. 
+HumanAPI recently launched on July 4th weekend of 2013, and has been confirmed as a platform to build applications on top of in different capacities.
+
+##InterSystems Cache
+
+
 
 GitHub by [@ronsween](http://twitter.com/#!/ronsween)for proper tracking of enhancements and maintenance.
 
@@ -21,8 +24,6 @@ Cache does not come with any native JSON support, necessitating a third party ut
 ## Information & Help
 
 * For information about Intersystems products visit their [website](http://www.intersystems.com).
-* Post to the [Intersystems Zen Google Group](http://groups.google.com/group/intersystems-zen) for help or questions.
-* See the [GitHub issue tracker](https://github.com/PlanetCache/CacheJSON/issues).
 * Visit the Intersystems [online documentation](http://docs.intersystems.com/).
 * Send a message to [@PlanetCache](http://twitter.com/#!/PlanetCache) on Twitter.
 
