@@ -1,13 +1,16 @@
 #intersystems-cache-humanapi-client
-==================================
 
 An InterSystems Cache Client for the HumanAPI.
 
 ![alt tag](https://raw.github.com/username/projectname/branch/path/to/img.png)
 
+##Quantified Health
+The idea that the Quantified Self movement in the context of devices and data points for patients can generate better outcomes for chronic disease management, healthier outcomes in patient care and provide relevant data to physicians on behalf of patients from these channels.  Use this client 
+
+
 
 ##The HumanAPI
-HumanAPI is an aggregator of consumer data streams from several devices in the market.  It keeps all of the data synchronized across all user devices and services, and normalizes it in real time to appropriate most up to date data.  The data is then served up via a normalized API to enable the rapid development of applications from a single endpoint/service.
+[HumanAPI](http://www.humanapi.co) is an aggregator of consumer data streams from several devices in the market.  It keeps all of the data synchronized across all user devices and services, and normalizes it in real time to appropriate most up to date data.  The data is then served up via a normalized API to enable the rapid development of applications from a single endpoint/service.
 
 * API Supports 11 Streams (Activity, Blood Glucose, Blood Pressure, Body Fat %, BMI, Genetic Information, Heart Rate, Location, Sleep, Weight, Height
 * API Supports 11 Vendors ( BodyMedia, Fitbit, Jawbone, Moves, HealthGraph, Nike, Glooko, Withings, iHealth, 23andMe, and Jawbone. 
