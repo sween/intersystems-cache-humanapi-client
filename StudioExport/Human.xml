@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for UNIX (Apple Mac OS X for x86-64) 2014.1 (Build 502U)" ts="2013-10-20 18:06:22">
+<Class name="IntegrationRequired.HumanAPI.Human">
+<Super>%RegisteredObject,%XML.Adaptor,%ZEN.DataModel.Adaptor</Super>
+<TimeChanged>63115,64789.653813</TimeChanged>
+<TimeCreated>63101,83966.361948</TimeCreated>
+
+<Parameter name="Server">
+<Default>api.humanapi.co</Default>
+</Parameter>
+
+<Parameter name="Port">
+<Default>443</Default>
+</Parameter>
+
+<Parameter name="Https">
+<Default>1</Default>
+</Parameter>
+
+<Parameter name="SSLConfiguration">
+<Default>HUMANAPI</Default>
+</Parameter>
+
+<Method name="GetHuman">
+<ClassMethod>1</ClassMethod>
+<ReturnType>%Net.HttpRequest</ReturnType>
+<Implementation><![CDATA[
+	
+ Set request = ##class(%Net.HttpRequest).%New()
+ 		
+ Set request.Server = ..%GetParameter("Server")
+ Set request.Port = ..%GetParameter("Port")
+ Set request.Https = ..%GetParameter("Https")
+ Set request.SSLConfiguration = ..%GetParameter("SSLConfiguration")
+ Set requestStream = ##class(%GlobalBinaryStream).%New()	
+ Set request.EntityBody = requestStream           
+		
+ quit request
+]]></Implementation>
+</Method>
+
+<Method name="Human">
+<Description>
+Profile</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Profile">
+<Description>
+Profile</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/profile")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Glucose">
+<Description>
+Blood Glucose
+Most Recent Blood Glucose Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_glucose")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="GlucoseReadings">
+<Description>
+Blood Glucose
+Most Recent Blood Glucose Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_glucose/readings")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="GlucoseReading">
+<Description>
+Blood Glucose
+Get Blood Glucose Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_glucose/readings/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="GlucoseReadingsByDate">
+<Description>
+Blood Glucose
+Get Blood Glucose Readings by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_glucose/readings/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Pressure">
+<Description>
+Blood Pressure
+Most Recent Blood Pressure Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_pressure")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="PressureReadings">
+<Description>
+Blood Pressure
+Most Recent Blood Pressure Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_pressure/readings")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="PressureReading">
+<Description>
+Blood Pressure
+Get Blood Pressure Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_pressure/readings/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="PressureReadingsByDate">
+<Description>
+Blood Pressure
+Get Blood Pressure Readings by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/blood_pressure/readings/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BMI">
+<Description>
+BMI
+Most Recent BMI Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/bmi")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BMIReadings">
+<Description>
+BMI
+Most Recent BMI Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/bmi/readings")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BMIReading">
+<Description>
+BMI
+Get BMI Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/bmi/readings/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BMIReadingsByDate">
+<Description>
+BMI
+Get BMI Readings by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/bmi/readings/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BodyFat">
+<Description>
+Body Fat
+Most Recent Body Fat Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/body_fat")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BodyFatReadings">
+<Description>
+Body Fat
+Most Recent Body Fat Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/body_fat/readings")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BodyFatReading">
+<Description>
+Body Fat
+Get Body Fat Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/body_fat/readings/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="BodyFatReadingsByDate">
+<Description>
+Body Fat
+Get Body Fat Readings by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/body_fat/readings/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="HeartRate">
+<Description>
+Heart Rate
+Most Recent Heart Rate Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/heart_rate")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="HeartRateReadings">
+<Description>
+Heart Rate
+Most Recent Heart Rate Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/heart_rate/readings")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="HeartRateReading">
+<Description>
+Heart Rate
+Get Heart Rate Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/heart_rate/readings/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="HeartRateReadingsByDate">
+<Description>
+Heart Rate
+Get Heart Rate Readings by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/heart_rate/readings/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Height">
+<Description>
+Height
+Most Recent Height Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/height")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="HeightReadings">
+<Description>
+Height
+Most Recent Height Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/height/readings")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="HeightReading">
+<Description>
+Height
+Get Height Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/height/readings/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="HeightReadingsByDate">
+<Description>
+Height
+Get Height Readings by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/height/readings/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Weight">
+<Description>
+Weight
+Most Recent Weight Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/weight")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="WeightReadings">
+<Description>
+Weight
+Most Recent Weight Reading</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/weight/readings")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="WeightReading">
+<Description>
+Weight
+Get Weight Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/weight/readings/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="WeightReadingsByDate">
+<Description>
+Weight
+Get Weight Readings by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/weight/readings/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Activities">
+<Description>
+Activities
+Most Recent Activities</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/activities")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="ActivitiesReading">
+<Description>
+Activities
+Get Activities Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/activities/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="ActivitiesByDate">
+<Description>
+Activities
+Get Activities  by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/activities/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="ActivitiesSummary">
+<Description>
+Activities
+Summary of most recent acive minutes.</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/activities/summary")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="ActivitiesSummaryByDate">
+<Description>
+Activities
+Summary of most recent acive minutes by Date (YYYY-MM-HH)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/activities/summary/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Sleeps">
+<Description>
+Sleeps
+Most Recent Sleeps</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/sleeps")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="SleepsReading">
+<Description>
+Sleeps
+Get Sleeps Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/sleeps/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="SleepsByDate">
+<Description>
+Sleeps
+Get Sleeps  by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/sleeps/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="SleepsSummary">
+<Description>
+Sleeps
+Summary of most recent acive minutes.</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/sleeps/summary")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="SleepsSummaryByDate">
+<Description>
+Sleeps
+Summary of most recent acive minutes by Date (YYYY-MM-HH)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/sleeps/summary/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Locations">
+<Description>
+Locations
+Most Recent Locations</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/locations")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="LocationsReading">
+<Description>
+Locations
+Get Locations Reading by Id</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Id:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/locations/"_Id)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="LocationsByDate">
+<Description>
+Locations
+Get Locations  by Date(YYY-MM-DD)</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String,Date:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/locations/daily/"_Date)			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="GeneticTraits">
+<Description>
+Traits
+Get Genetic Traits</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token", AccessToken)
+ Do request.Get("/v1/human/genetic/traits")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+
+<Method name="Summary">
+<Description>
+Summary of the Persons Health Data</Description>
+<ClassMethod>1</ClassMethod>
+<FormalSpec>AccessToken:%String</FormalSpec>
+<ReturnType>%ArrayOfDataTypes</ReturnType>
+<Implementation><![CDATA[
+
+ Set sc = $$$OK
+			
+ Set request = ..GetHuman()
+ Do request.InsertParam("access_token",AccessToken)
+ Do request.Get("/v1/human")			
+ Quit:$System.Status.IsError(sc)
+			
+ Set responseStream = ##class(%Stream.GlobalBinary).%New() 
+ Set response = request.HttpResponse.Data.Read()			
+ Set returnHumanresponse = ##class(IntegrationRequired.HumanAPI.Lib.CacheJSON).Decode(response)
+ Quit:$System.Status.IsError(sc)
+ 
+ Quit returnHumanresponse
+]]></Implementation>
+</Method>
+</Class>
+</Export>
