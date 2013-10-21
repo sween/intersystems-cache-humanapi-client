@@ -1,6 +1,6 @@
 #intersystems-cache-humanapi-client
 
-An InterSystems Cache Client for the HumanAPI.
+An InterSystems Cache Client for the HumanAPI by [@ronsween](http://twitter.com/#!/ronsween) of [Integration Required, LLC](http://www.integrationrequired.com).
 
 ![alt tag](https://raw.github.com/sween/intersystems-cache-humanapi-client/master/human-cache.png)
 
@@ -76,6 +76,56 @@ Do $System.OBJ.Dump(response)
 ````
 
 
+## Supported Methods
+
+```ruby
+ClassMethod GetHuman
+ClassMethod Human
+ClassMethod Profile
+ClassMethod Glucose
+ClassMethod GlucoseReadings
+ClassMethod GlucoseReading
+ClassMethod GlucoseReadingsByDate
+ClassMethod Pressure
+ClassMethod PressureReadings
+ClassMethod PressureReading
+ClassMethod PressureReadingsByDate
+ClassMethod BMI
+ClassMethod BMIReadings
+ClassMethod BMIReading
+ClassMethod BMIReadingsByDate
+ClassMethod BodyFat
+ClassMethod BodyFatReadings
+ClassMethod BodyFatReading
+ClassMethod BodyFatReadingsByDate
+ClassMethod HeartRate
+ClassMethod HeartRateReadings
+ClassMethod HeartRateReading
+ClassMethod HeartRateReadingsByDate
+ClassMethod Height
+ClassMethod HeightReadings
+ClassMethod HeightReading
+ClassMethod HeightReadingsByDate
+ClassMethod Weight
+ClassMethod WeightReadings
+ClassMethod WeightReading
+ClassMethod WeightReadingsByDate
+ClassMethod Activities
+ClassMethod ActivitiesReading
+ClassMethod ActivitiesByDate
+ClassMethod ActivitiesSummary
+ClassMethod ActivitiesSummaryByDate
+ClassMethod Sleeps
+ClassMethod SleepsReading
+ClassMethod SleepsByDate
+ClassMethod SleepsSummary
+ClassMethod SleepsSummaryByDate
+ClassMethod Locations
+ClassMethod LocationsReading
+ClassMethod LocationsByDate
+ClassMethod GeneticTraits
+ClassMethod Summary
+````
 ## Have Fun
 
 HumanAPI Client for InterSystems Cache by [@ronsween](http://twitter.com/#!/ronsween) of [Integration Required, LLC](http://www.integrationrequired.com).
