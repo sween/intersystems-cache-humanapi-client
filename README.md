@@ -29,7 +29,6 @@ HumanAPI recently launched on July 4th weekend of 2013, and has been confirmed a
 ## Installation
 
 ### Create an SSL Object
-
 Create an SSL Object `HUMANAPI` for host `api.humanapi.co` from the System Management Portal, and make sure you get a successful test.
 
 ``` ruby
@@ -37,24 +36,44 @@ Parameter SSLConfiguration = "HUMANAPI";
 ````
 
 ### Import Classes
-
-Import the class into your `namespace` and compile.
-
-Then call the `HumanAPI` class methods from your code.
+Import the classes into your `namespace` from the Studio export `StudioExport\Human.xml` and compile.
 
 
-##CacheJSON
+###CacheJSON
 Cache does not come with any native JSON support, necessitating a third party utility to translate JSON strings to & from Cache objects for applications.  Recent releases of the Ensemble and HealthShare products have JSON support for the Zen stack, but for purposes of keeping it clean and usable for Cache Single Development installs, this solution utilizes the [CacheJSON](https://github.com/PlanetCache/CacheJSON) library to accomplish JSON marshalling to Cache Objects.  The Library has been included in the package for your conveinence. 
 
 ## Usage
 
-Below I'll go through some of the common uses and flows you can use with CacheJSON.
+You can either get yourself a developer account on HumanAPI or interact with the client with the `demo` token for use with this library to take it for a spin.  A developer account will be required to register your application with HumanAPI, once you are ready to get serious with your application.
+
+Lets Grab the the top level Human object using the demo token:
 
 ``` ruby
-Set encodedList = ##class(CacheJSON).Encode(list)
+set response = ##class(IntegrationRequired.HumanAPI.Human).Human("demo")
 ````
-
-
+Returns the following Array of Data Types:
+``` ruby
+Do $System.OBJ.Dump(response)                                                       
++----------------- general information ---------------
+|      oref value: 7
+|      class name: %Library.ArrayOfDataTypes
+| reference count: 1
++----------------- attribute values ------------------
+|Data("activitySummary") = "33@%Library.ListOfDataTypes"
+|Data("bloodGlucose") = "18@%Library.ArrayOfDataTypes"
+|Data("bloodPressure") = "20@%Library.ArrayOfDataTypes"
+|        Data("bmi") = "22@%Library.ArrayOfDataTypes"
+|    Data("bodyFat") = "24@%Library.ArrayOfDataTypes"
+|  Data("createdAt") = "2013-09-24T16:17:16.482Z"
+|      Data("email") = "demo@humanapi.co"
+|     Data("gender") = "male"
+|  Data("heartRate") = "29@%Library.ArrayOfDataTypes"
+|     Data("height") = "26@%Library.ArrayOfDataTypes"
+|Data("sleepSummary") = "35@%Library.ArrayOfDataTypes"
+|     Data("userId") = "5241bb0c69f3d19828000001"
+|     Data("weight") = "31@%Library.ArrayOfDataTypes"
+|        ElementType = "%String"
+````
 
 
 ## Have Fun
