@@ -91,6 +91,7 @@ Do $System.OBJ.Dump(response)
 Thats a lot of cool data in there eh ?
 
 ## Supported Methods
+Once compiled with Studio, you can take advantage of reviewing the methods through the documentation portal and the auto-documentation feature of Cache Object Script, but here is a sneak peak at the methods supported.
 
 ```ruby
 ClassMethod GetHuman
