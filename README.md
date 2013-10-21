@@ -46,7 +46,20 @@ Cache does not come with any native JSON support, necessitating a third party ut
 
 You can either get yourself a developer account on HumanAPI or interact with the client with the `demo` token for use with this library to take it for a spin.  A developer account will be required to register your application with HumanAPI, once you are ready to get serious with your application.
 
-Lets Grab the the top level Human object using the demo token:
+As an Example, grab the persons latest Blood Glucose Reading using the demo token:
+
+```ruby
+set response = ##class(IntegrationRequired.HumanAPI.Human).GlucoseReading("demo", "5241bb0f69f3d1982800044a")
+````
+
+Return the latest reading:
+
+```ruby                                                      
+w response.Data("value")_" "_response.Data("unit")
+92 mg/dL
+````
+
+Now lets Grab the the top level Human object using the demo token:
 
 ``` ruby
 set response = ##class(IntegrationRequired.HumanAPI.Human).Human("demo")
