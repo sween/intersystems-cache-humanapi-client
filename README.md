@@ -2,7 +2,7 @@
 
 An InterSystems Cache Client for the HumanAPI.
 
-![alt tag](https://raw.github.com/username/projectname/branch/path/to/img.png)
+![alt tag](https://raw.github.com/sween/intersystems-cache-humanapi-client/master/human-cache.png)
 
 ##Quantified Health
 The idea that the Quantified Self movement in the context of devices and data points for patients can generate better outcomes for chronic disease management, healthier outcomes in patient care and provide relevant data to physicians on behalf of patients from these channels.  Use this client and the HumanAPI to use this data for your next breakthrough application in `Quantified Health`.
